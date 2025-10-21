@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import SentimentGauge from "@/components/SentimentGauge";
 import { 
   MessageSquare, Clock, CheckCircle, Star, Search, Send,
   AlertCircle, TrendingUp, User, Car, Calendar, Mail, Phone,
@@ -113,22 +115,29 @@ const AgentDashboard = () => {
           {metrics.map((metric, i) => {
             const Icon = metric.icon;
             return (
-              <Card key={i} className="glass hover:scale-105 transition-transform">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <Icon className={`w-8 h-8 ${metric.color}`} />
-                    <span className={`text-sm font-semibold ${
-                      metric.change.startsWith('+') ? 'text-success' : 
-                      metric.change.startsWith('-') ? 'text-destructive' : 
-                      'text-muted-foreground'
-                    }`}>
-                      {metric.change}
-                    </span>
-                  </div>
-                  <div className="text-3xl font-bold">{metric.value}</div>
-                  <div className="text-sm text-muted-foreground mt-1">{metric.label}</div>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className="glass hover:scale-105 transition-transform">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <Icon className={`w-8 h-8 ${metric.color}`} />
+                      <span className={`text-sm font-semibold ${
+                        metric.change.startsWith('+') ? 'text-success' : 
+                        metric.change.startsWith('-') ? 'text-destructive' : 
+                        'text-muted-foreground'
+                      }`}>
+                        {metric.change}
+                      </span>
+                    </div>
+                    <div className="text-3xl font-bold">{metric.value}</div>
+                    <div className="text-sm text-muted-foreground mt-1">{metric.label}</div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             );
           })}
         </div>
@@ -336,7 +345,9 @@ const AgentDashboard = () => {
                   <TabsContent value="ai" className="space-y-4">
                     <div>
                       <p className="font-semibold mb-3">Sentiment Trend</p>
-                      <ResponsiveContainer width="100%" height={120}>
+                      <SentimentGauge sentiment={-30} size="lg" />
+                      <div className="mt-4">
+                        <ResponsiveContainer width="100%" height={120}>
                         <LineChart data={sentimentData}>
                           <CartesianGrid strokeDasharray="3 3" />
                           <XAxis dataKey="time" tick={{ fontSize: 10 }} />
@@ -345,6 +356,7 @@ const AgentDashboard = () => {
                           <Line type="monotone" dataKey="sentiment" stroke="hsl(var(--secondary))" strokeWidth={2} />
                         </LineChart>
                       </ResponsiveContainer>
+                      </div>
                     </div>
 
                     <div>

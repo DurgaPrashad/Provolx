@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, MessageSquare, FileText, Settings, Bell, Clock } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import CarModel3D from "@/components/CarModel3D";
 
 const CustomerDashboard = () => {
   const vehicle = {
@@ -63,14 +65,27 @@ const CustomerDashboard = () => {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
+            {/* 3D Car Model */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <CarModel3D />
+            </motion.div>
+
             {/* Vehicle Card */}
-            <Card className="glass">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Car className="w-5 h-5 text-secondary" />
-                  My Vehicle
-                </CardTitle>
-              </CardHeader>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <Card className="glass">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Car className="w-5 h-5 text-secondary" />
+                    My Vehicle
+                  </CardTitle>
+                </CardHeader>
               <CardContent>
                 <div className="flex items-start gap-6">
                   <div className="w-32 h-32 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
@@ -105,9 +120,15 @@ const CustomerDashboard = () => {
                 </div>
               </CardContent>
             </Card>
+            </motion.div>
 
             {/* Recent Conversations */}
-            <Card className="glass">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Card className="glass">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-secondary" />
@@ -143,9 +164,15 @@ const CustomerDashboard = () => {
                 <Button variant="outline" className="w-full mt-4">View All Conversations</Button>
               </CardContent>
             </Card>
+            </motion.div>
 
             {/* Service History */}
-            <Card className="glass">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Card className="glass">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="w-5 h-5 text-secondary" />
@@ -173,6 +200,7 @@ const CustomerDashboard = () => {
                 </div>
               </CardContent>
             </Card>
+            </motion.div>
           </div>
 
           {/* Sidebar */}

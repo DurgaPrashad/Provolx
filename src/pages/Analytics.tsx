@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, TrendingDown, Download, Calendar } from "lucide-react";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { 
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
@@ -84,27 +86,40 @@ const Analytics = () => {
         {/* KPIs */}
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           {kpis.map((kpi, i) => (
-            <Card key={i} className="glass hover:scale-105 transition-transform">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm text-muted-foreground">{kpi.label}</span>
-                  {kpi.trend === "up" ? (
-                    <TrendingUp className="w-5 h-5 text-success" />
-                  ) : kpi.trend === "down" ? (
-                    <TrendingDown className="w-5 h-5 text-destructive" />
-                  ) : null}
-                </div>
-                <div className="text-3xl font-bold mb-2">{kpi.value}</div>
-                <div className={`text-sm font-semibold ${
-                  kpi.change.startsWith('+') ? 'text-success' :
-                  kpi.change.startsWith('-') && kpi.trend === 'up' ? 'text-success' :
-                  kpi.change === '0%' ? 'text-muted-foreground' :
-                  'text-destructive'
-                }`}>
-                  {kpi.change} vs last week
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <Card className="glass hover:scale-105 transition-transform">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-sm text-muted-foreground">{kpi.label}</span>
+                    {kpi.trend === "up" ? (
+                      <TrendingUp className="w-5 h-5 text-success" />
+                    ) : kpi.trend === "down" ? (
+                      <TrendingDown className="w-5 h-5 text-destructive" />
+                    ) : null}
+                  </div>
+                  <div className="text-3xl font-bold mb-2">
+                    {kpi.label === "Total Conversations" ? (
+                      <AnimatedCounter value={24567} />
+                    ) : (
+                      kpi.value
+                    )}
+                  </div>
+                  <div className={`text-sm font-semibold ${
+                    kpi.change.startsWith('+') ? 'text-success' :
+                    kpi.change.startsWith('-') && kpi.trend === 'up' ? 'text-success' :
+                    kpi.change === '0%' ? 'text-muted-foreground' :
+                    'text-destructive'
+                  }`}>
+                    {kpi.change} vs last week
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 

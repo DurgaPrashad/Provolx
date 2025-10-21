@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Zap, Shield, Globe, ArrowRight, CheckCircle, TrendingUp, Clock, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import ParticlesBackground from "@/components/ParticlesBackground";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Index = () => {
@@ -46,20 +49,43 @@ const Index = () => {
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-vw-blue/90 via-vw-blue/70 to-vw-light-blue/60" />
+        <ParticlesBackground />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-5xl md:text-7xl font-bold text-white leading-tight"
+            >
               Transform After-Sales Support with{" "}
-              <span className="text-secondary animate-pulse-slow">AI Intelligence</span>
-            </h1>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-secondary"
+              >
+                AI Intelligence
+              </motion.span>
+            </motion.h1>
             
-            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto"
+            >
               Revolutionize your customer service with sentiment-aware AI that understands, responds, and resolves in real-time
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-              <Link to="/customer-dashboard">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+            >
+              <Link to="/demo">
                 <Button size="lg" variant="hero" className="text-lg px-8 py-6 gap-2">
                   Live Demo <ArrowRight className="w-5 h-5" />
                 </Button>
@@ -69,7 +95,7 @@ const Index = () => {
                   View Dashboard
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
 
@@ -94,18 +120,29 @@ const Index = () => {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card 
-                  key={index} 
-                  className="glass border-2 hover:border-secondary transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
-                  <CardContent className="p-6 space-y-4">
-                    <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center">
-                      <Icon className="w-7 h-7 text-secondary" />
-                    </div>
-                    <h3 className="text-xl font-bold">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
+                  <Card 
+                    className="glass border-2 hover:border-secondary transition-all duration-300 hover:scale-105 hover:shadow-xl h-full"
+                  >
+                    <CardContent className="p-6 space-y-4">
+                      <motion.div 
+                        whileHover={{ rotate: 360, scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                        className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center"
+                      >
+                        <Icon className="w-7 h-7 text-secondary" />
+                      </motion.div>
+                      <h3 className="text-xl font-bold">{feature.title}</h3>
+                      <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               );
             })}
           </div>
@@ -119,14 +156,23 @@ const Index = () => {
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <div 
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2, duration: 0.5 }}
                   className="text-center space-y-4 p-8 glass rounded-2xl border-white/20 hover:scale-105 transition-transform"
                 >
-                  <Icon className="w-12 h-12 text-white mx-auto" />
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <Icon className="w-12 h-12 text-white mx-auto" />
+                  </motion.div>
                   <div className="text-6xl font-bold text-white">{stat.value}</div>
                   <div className="text-xl text-white/90">{stat.label}</div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
