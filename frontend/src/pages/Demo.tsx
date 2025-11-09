@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Pause, RotateCcw, Smile, Meh, Frown, CheckCircle } from "lucide-react";
+import { Play, Pause, RotateCcw, Smile, Meh, Frown, CheckCircle, ChevronDown, LayoutDashboard, BarChart3, GitBranch, Layers } from "lucide-react";
 import SentimentGauge from "@/components/SentimentGauge";
 import Confetti from "react-confetti";
 
@@ -19,6 +20,7 @@ const Demo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const script: Message[] = [
     { id: 1, sender: "customer", text: "Hi, my car is making a strange noise", sentiment: 0, delay: 1000 },
@@ -30,6 +32,14 @@ const Demo = () => {
     { id: 7, sender: "agent", text: "I've checked your vehicle history. Your timing belt is due for inspection. I can book an emergency appointment today at 3 PM.", sentiment: 50, delay: 2500 },
     { id: 8, sender: "customer", text: "That would be perfect! Thank you so much!", sentiment: 80, delay: 1500 },
     { id: 9, sender: "agent", text: "Appointment confirmed! You'll receive a confirmation email shortly. We'll have you back on the road safely.", sentiment: 90, delay: 2000 },
+  ];
+
+  const demoItems = [
+    { path: "/customer-dashboard", label: "Customer", icon: LayoutDashboard },
+    { path: "/agent-dashboard", label: "Agent", icon: LayoutDashboard },
+    { path: "/analytics", label: "Analytics", icon: BarChart3 },
+    { path: "/process-flow", label: "Process", icon: GitBranch },
+    { path: "/tech-stack", label: "Tech Stack", icon: Layers }
   ];
 
   useEffect(() => {
@@ -100,6 +110,43 @@ const Demo = () => {
             <RotateCcw className="w-5 h-5" />
             Reset
           </Button>
+          
+          {/* Dropdown for remaining items */}
+          <div className="relative">
+            <Button 
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+              size="lg" 
+              variant="default" 
+              className="gap-2"
+            >
+              More Options <ChevronDown className={`w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            </Button>
+            
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute top-full right-0 mt-2 w-48 glass rounded-lg border border-secondary/20 shadow-lg z-50"
+              >
+                {demoItems.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link 
+                      key={index} 
+                      to={item.path}
+                      className="block"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <div className="flex items-center gap-3 p-3 hover:bg-secondary/10 rounded-lg transition-colors">
+                        <Icon className="w-5 h-5 text-secondary" />
+                        <span>{item.label}</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </motion.div>
+            )}
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">

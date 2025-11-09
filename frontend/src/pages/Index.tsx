@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Zap, Shield, Globe, ArrowRight, CheckCircle, TrendingUp, Clock, MessageSquare, Bot, Headphones, ClockIcon, FileText, Car } from "lucide-react";
+import { Zap, Shield, Globe, ArrowRight, CheckCircle, TrendingUp, Clock, MessageSquare, Bot, Headphones, ClockIcon, FileText, Car, User, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ParticlesBackground from "@/components/ParticlesBackground";
@@ -8,6 +9,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Index = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
   const features = [
     {
       icon: Zap,
@@ -199,8 +202,8 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="flex flex-col items-center"
             >
-              <div className="loader" style={{ '--size': '1.5' }}> {/* Increased size */}
-                <svg width="150" height="150" viewBox="0 0 100 100"> {/* Increased SVG size */}
+              <div className="loader" style={{ transform: "scale(1.5)" }}>
+                <svg width="100" height="100" viewBox="0 0 100 100">
                   <defs>
                     <mask id="clipping">
                       <polygon points="0,0 100,0 100,100 0,100" fill="black"></polygon>
@@ -226,11 +229,6 @@ const Index = () => {
                 <Link to="/demo">
                   <Button size="lg" variant="default" className="text-lg px-8 py-6 gap-2">
                     <Bot className="w-5 h-5" /> Talk to AI Agent
-                  </Button>
-                </Link>
-                <Link to="/customer-dashboard">
-                  <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                    Book Service
                   </Button>
                 </Link>
               </motion.div>
@@ -326,6 +324,78 @@ const Index = () => {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Login Demo Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
+              Experience Provolx
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Discover how Provolx transforms the after-sales experience for both customers and service providers
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card className="glass h-full border-2 border-secondary/20 hover:border-secondary transition-colors">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                    <User className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Customer Experience</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Experience seamless after-sales support with our AI-powered platform designed for vehicle owners.
+                  </p>
+                  <Link to="/customer-demo">
+                    <Button size="lg" variant="default" className="w-full">
+                      View Customer Demo
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <Card className="glass h-full border-2 border-secondary/20 hover:border-secondary transition-colors">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                    <Wrench className="w-8 h-8 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Service Provider Experience</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Empower your service center with AI intelligence for enhanced efficiency and customer satisfaction.
+                  </p>
+                  <Link to="/provider-demo">
+                    <Button size="lg" variant="default" className="w-full">
+                      View Provider Demo
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to="/login">
+              <Button size="lg" variant="hero" className="text-lg px-8 py-6">
+                Login to Your Account
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

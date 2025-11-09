@@ -10,6 +10,9 @@ import ChatWidget from "./components/ChatWidget";
 import LoadingScreen from "./components/LoadingScreen";
 import KeyboardShortcuts from "./components/KeyboardShortcuts";
 import Index from "./pages/Index";
+import Login from "./pages/Login";
+import CustomerDemo from "./pages/CustomerDemo";
+import ProviderDemo from "./pages/ProviderDemo";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import AgentDashboard from "./pages/AgentDashboard";
 import Analytics from "./pages/Analytics";
@@ -37,6 +40,9 @@ const App = () => {
             <Navigation />
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/customer-demo" element={<CustomerDemo />} />
+              <Route path="/provider-demo" element={<ProviderDemo />} />
               <Route path="/customer-dashboard" element={<CustomerDashboard />} />
               <Route path="/agent-dashboard" element={<AgentDashboard />} />
               <Route path="/analytics" element={<Analytics />} />
