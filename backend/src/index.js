@@ -5,6 +5,7 @@ const { connectDB } = require('./database');
 const authRoutes = require('./routes/AuthRoutes');
 const userRoutes = require('./routes/UserRoutes');
 const serviceRoutes = require('./routes/ServiceRoutes');
+const chatRoutes = require('./routes/ChatRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -24,6 +25,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Provolx Backend API' });

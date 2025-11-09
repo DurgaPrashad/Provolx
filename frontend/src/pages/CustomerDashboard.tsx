@@ -3,9 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, MessageSquare, FileText, Settings, Bell, Clock } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import CarModel3D from "@/components/CarModel3D";
+import AIServiceContainer from "@/components/AIServiceContainer";
+import VoiceAssistant from "@/components/VoiceAssistant";
+import { useState } from "react";
 
 const CustomerDashboard = () => {
+  const [showChat, setShowChat] = useState(false);
+  
   const vehicle = {
     model: "2023 VW Taigun",
     mileage: "12,500 km",
@@ -65,19 +69,28 @@ const CustomerDashboard = () => {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* 3D Car Model */}
+            {/* AI Service Container */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <CarModel3D />
+              <AIServiceContainer />
+            </motion.div>
+
+            {/* Voice Assistant */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <VoiceAssistant />
             </motion.div>
 
             {/* Vehicle Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.2 }}
             >
               <Card className="glass">
                 <CardHeader>
@@ -126,7 +139,7 @@ const CustomerDashboard = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.3 }}
             >
               <Card className="glass">
               <CardHeader>
@@ -170,7 +183,7 @@ const CustomerDashboard = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.4 }}
             >
               <Card className="glass">
               <CardHeader>

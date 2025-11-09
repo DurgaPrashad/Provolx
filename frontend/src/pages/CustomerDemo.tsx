@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Car, MessageCircle, Calendar, FileText, Star } from "lucide-react";
+import AIServiceContainer from "@/components/AIServiceContainer";
 
 const CustomerDemo = () => {
   const features = [
@@ -28,6 +29,11 @@ const CustomerDemo = () => {
     }
   ];
 
+  const handleTalkToAI = () => {
+    // In a real implementation, this would open the chat widget or navigate to chat
+    console.log("Talking to AI Service Provider");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
@@ -44,6 +50,16 @@ const CustomerDemo = () => {
             Experience how Provolx transforms your after-sales service with AI intelligence
           </p>
         </div>
+
+        {/* AI Service Container */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-12"
+        >
+          <AIServiceContainer onTalkToAI={handleTalkToAI} />
+        </motion.div>
 
         {/* Demo Overview */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
