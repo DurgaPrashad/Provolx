@@ -74,7 +74,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         transition={{ delay: 0.3 }}
         className="text-4xl font-bold text-white mb-8"
       >
-        VW SmartSupport
+        Provolx
       </motion.h1>
 
       {/* Progress Bar */}

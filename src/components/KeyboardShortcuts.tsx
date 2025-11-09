@@ -34,11 +34,11 @@ const KeyboardShortcuts = () => {
 
   return (
     <>
-      {/* Hint badge */}
+      {/* Hint badge - moved to the left */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="fixed bottom-4 right-4 z-40"
+        className="fixed bottom-4 left-4 z-40"
       >
         <button
           onClick={() => setIsOpen(true)}
@@ -61,12 +61,13 @@ const KeyboardShortcuts = () => {
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
             />
 
-            {/* Modal */}
+            {/* Modal - positioned slightly higher */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
+              style={{ transform: "translate(-50%, -60%)" }}
             >
               <Card className="glass border-2 border-secondary/20">
                 <CardHeader className="flex flex-row items-center justify-between">

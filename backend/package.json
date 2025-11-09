@@ -1,0 +1,20 @@
+{
+  "name": "provolx-backend",
+  "version": "1.0.0",
+  "description": "Backend service for Provolx using MongoDB",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "mongoose": "^7.0.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "@types/express": "^4.17.17"
+  }
+}

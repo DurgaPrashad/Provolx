@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Zap, Shield, Globe, ArrowRight, CheckCircle, TrendingUp, Clock, MessageSquare } from "lucide-react";
+import { Zap, Shield, Globe, ArrowRight, CheckCircle, TrendingUp, Clock, MessageSquare, Bot, Headphones, ClockIcon, FileText, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ParticlesBackground from "@/components/ParticlesBackground";
@@ -37,18 +37,65 @@ const Index = () => {
     { value: "80%", label: "Faster Response Time", icon: Clock }
   ];
 
+  const customerBenefits = [
+    {
+      icon: Headphones,
+      title: "24/7 Availability",
+      description: "Get instant help anytime, anywhere without waiting for business hours"
+    },
+    {
+      icon: Zap,
+      title: "Instant Responses",
+      description: "No more waiting on hold - get immediate answers to your questions"
+    },
+    {
+      icon: Globe,
+      title: "Multilingual Support",
+      description: "Communicate in your preferred language with our AI assistant"
+    },
+    {
+      icon: ClockIcon,
+      title: "Time Saving",
+      description: "Resolve issues quickly without lengthy phone calls or visits"
+    }
+  ];
+
+  const supportBenefits = [
+    {
+      icon: FileText,
+      title: "Automated Documentation",
+      description: "AI automatically logs and categorizes customer interactions for future reference"
+    },
+    {
+      icon: TrendingUp,
+      title: "Performance Analytics",
+      description: "Real-time insights into customer satisfaction and support metrics"
+    },
+    {
+      icon: Car,
+      title: "Predictive Maintenance",
+      description: "Proactive service recommendations based on vehicle data and usage patterns"
+    },
+    {
+      icon: Shield,
+      title: "Quality Assurance",
+      description: "Consistent, accurate responses that follow brand guidelines and protocols"
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
         className="relative h-screen flex items-center justify-center overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(0, 30, 80, 0.95), rgba(0, 176, 240, 0.85)), url(${heroImage})`,
+          backgroundImage: `linear-gradient(rgba(0, 30, 80, 0.7), rgba(0, 176, 240, 0.7)), url(${heroImage})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-vw-blue/90 via-vw-blue/70 to-vw-light-blue/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-vw-blue/70 via-vw-blue/40 to-vw-light-blue/30" />
         <ParticlesBackground />
         
         <div className="container mx-auto px-4 relative z-10">
@@ -102,6 +149,184 @@ const Index = () => {
         {/* Floating Elements */}
         <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-secondary/20 blur-xl animate-float" />
         <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-primary/20 blur-xl animate-float" style={{ animationDelay: "1s" }} />
+      </section>
+
+      {/* AI Agent Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
+              Meet Your AI Assistant
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Our intelligent AI agent is ready to help you. You can talk to it and book services anytime.
+            </p>
+          </div>
+
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-16">
+            {/* Left Glass Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="w-full lg:w-1/3 glass rounded-2xl p-6 border border-secondary/20"
+            >
+              <h3 className="text-2xl font-bold mb-4 text-primary">Benefits for Customers</h3>
+              <div className="space-y-4">
+                {customerBenefits.map((benefit, index) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="mt-1 p-2 rounded-lg bg-secondary/10">
+                        <Icon className="w-5 h-5 text-secondary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{benefit.title}</h4>
+                        <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Center Animation - Made Bigger */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col items-center"
+            >
+              <div className="loader" style={{ '--size': '1.5' }}> {/* Increased size */}
+                <svg width="150" height="150" viewBox="0 0 100 100"> {/* Increased SVG size */}
+                  <defs>
+                    <mask id="clipping">
+                      <polygon points="0,0 100,0 100,100 0,100" fill="black"></polygon>
+                      <polygon points="25,25 75,25 50,75" fill="white"></polygon>
+                      <polygon points="50,25 75,75 25,75" fill="white"></polygon>
+                      <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                      <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                      <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                      <polygon points="35,35 65,35 50,65" fill="white"></polygon>
+                    </mask>
+                  </defs>
+                </svg>
+                <div className="box"></div>
+              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8"
+              >
+                <Link to="/demo">
+                  <Button size="lg" variant="default" className="text-lg px-8 py-6 gap-2">
+                    <Bot className="w-5 h-5" /> Talk to AI Agent
+                  </Button>
+                </Link>
+                <Link to="/customer-dashboard">
+                  <Button size="lg" variant="outline" className="text-lg px-8 py-6">
+                    Book Service
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Right Glass Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="w-full lg:w-1/3 glass rounded-2xl p-6 border border-secondary/20"
+            >
+              <h3 className="text-2xl font-bold mb-4 text-primary">Benefits for After-Sales Support</h3>
+              <div className="space-y-4">
+                {supportBenefits.map((benefit, index) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="mt-1 p-2 rounded-lg bg-secondary/10">
+                        <Icon className="w-5 h-5 text-secondary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{benefit.title}</h4>
+                        <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Detailed Information Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="glass rounded-2xl p-8 border border-secondary/20 max-w-4xl mx-auto"
+          >
+            <h3 className="text-3xl font-bold mb-6 text-center text-primary">How AI Intelligence Transforms After-Sales Support</h3>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-xl font-semibold mb-4 text-secondary">For Customers</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Personalized Assistance:</strong> AI understands your specific vehicle model and service history for tailored recommendations</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Proactive Support:</strong> Receive maintenance reminders and service alerts before issues arise</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Seamless Experience:</strong> Access support through your preferred channel - chat, voice, or mobile app</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Real-time Updates:</strong> Track service progress and get instant notifications about your vehicle status</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-xl font-semibold mb-4 text-secondary">For After-Sales Support Teams</h4>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Enhanced Efficiency:</strong> Automate routine inquiries, freeing agents to handle complex issues</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Data-Driven Insights:</strong> Leverage analytics to identify trends and improve service quality</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Consistent Service:</strong> Ensure all customers receive uniform, high-quality support regardless of agent availability</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                    <span><strong>Scalable Solutions:</strong> Handle increased customer volume without proportional staffing increases</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="mt-8 text-center">
+              <p className="text-lg">
+                With AI Intelligence, we're not just improving support - we're redefining the entire after-sales experience.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Features Section */}

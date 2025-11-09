@@ -86,7 +86,7 @@ const Demo = () => {
             Live Demo: AI-Powered Support Flow
           </motion.h1>
           <p className="text-muted-foreground">
-            Watch how VW SmartSupport handles a real customer interaction
+            Watch how Provolx handles a real customer interaction
           </p>
         </div>
 

@@ -58,7 +58,7 @@ const Admin = () => {
               <CardContent className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="platform-name">Platform Name</Label>
-                  <Input id="platform-name" defaultValue="VW SmartSupport" />
+                  <Input id="platform-name" defaultValue="Provolx" />
                 </div>
 
                 <div className="space-y-2">

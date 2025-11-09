@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import VoiceWaveAnimation from "./VoiceWaveAnimation";
 
 interface Message {
@@ -22,7 +23,7 @@ const ChatWidget = () => {
     {
       id: "1",
       sender: "ai",
-      content: "Hello! I'm your VW SmartSupport assistant. How can I help you today?",
+      content: "Hello! I'm your Provolx assistant. How can I help you today?",
       timestamp: new Date(),
       sentiment: "positive"
     }
@@ -47,11 +48,26 @@ const ChatWidget = () => {
     "Emergency Help"
   ];
 
+  // Initialize Gemini AI
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isTyping]);
+
+  const generateAIResponse = async (userMessage: string) => {
+    try {
+      const result = await model.generateContent(userMessage);
+      const response = await result.response;
+      return response.text();
+    } catch (error) {
+      console.error("Error generating AI response:", error);
+      return "Sorry, I encountered an error while processing your request. Please try again.";
+    }
+  };
 
   const handleSend = async () => {
     if (!inputValue.trim()) return;
@@ -68,26 +84,32 @@ const ChatWidget = () => {
     setShowSuggestions(false);
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const responses = [
-        { content: "I'd be happy to help you book a service appointment. What type of service do you need?", sentiment: "positive" as const },
-        { content: "Let me check that information for you...", sentiment: "neutral" as const },
-        { content: "I can help you with that. Which dealership would you prefer?", sentiment: "positive" as const }
-      ];
-      const response = responses[Math.floor(Math.random() * responses.length)];
+    // Generate AI response
+    try {
+      const aiResponse = await generateAIResponse(inputValue);
       
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: "ai",
-        content: response.content,
+        content: aiResponse,
         timestamp: new Date(),
-        sentiment: response.sentiment
+        sentiment: "positive"
       };
       
       setMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: "ai",
+        content: "Sorry, I encountered an error while processing your request. Please try again.",
+        timestamp: new Date(),
+        sentiment: "negative"
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleReaction = (messageId: string, reaction: "up" | "down") => {
@@ -164,7 +186,7 @@ const ChatWidget = () => {
           <div className="flex items-center justify-between p-4 border-b border-border gradient-vw rounded-t-2xl">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-success animate-pulse" />
-              <span className="font-semibold text-primary-foreground">VW SmartSupport</span>
+              <span className="font-semibold text-primary-foreground">Provolx</span>
             </div>
             <Button
               variant="ghost"
